@@ -256,6 +256,7 @@ public class RIL extends BaseCommands implements CommandsInterface {
 
     final Integer mPhoneId;
     private List<String> mOldRilFeatures;
+    private boolean mUseOldMncMccFormat;
 
     private boolean mUseOldMncMccFormat;
 
@@ -629,6 +630,9 @@ public class RIL extends BaseCommands implements CommandsInterface {
 
         final String oldRilFeatures = SystemProperties.get("ro.telephony.ril.config", "");
         mOldRilFeatures = Arrays.asList(oldRilFeatures.split(","));
+
+        mUseOldMncMccFormat = SystemProperties.getBoolean(
+                "ro.telephony.use_old_mnc_mcc_format", false);
 
         TelephonyManager tm = (TelephonyManager) context.getSystemService(
                 Context.TELEPHONY_SERVICE);
